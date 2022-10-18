@@ -75,9 +75,7 @@ public class ProductManagerTest {
         manager.add(book3);
         manager.add(book4);
 
-
         Product[] expected = {book2};
-
 
         Assertions.assertArrayEquals(expected, manager.searchBy("book2"));
     }
