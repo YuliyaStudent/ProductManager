@@ -1,8 +1,10 @@
 package ru.netology.repository;
+
 import ru.netology.domain.Product;
 
 public class ProductRepository {
     private Product[] items = new Product[0];
+
     public void save(Product item) {
         int length = items.length + 1;
         Product[] tmp = new Product[length];
@@ -11,9 +13,11 @@ public class ProductRepository {
         tmp[lastIndex] = item;
         items = tmp;
     }
+
     public Product[] findAll() {
         return items;
     }
+
     public void removeById(int id) {
         int length = items.length - 1;
         Product[] tmp = new Product[length];
