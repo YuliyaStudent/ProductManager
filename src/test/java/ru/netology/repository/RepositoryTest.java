@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
+import ru.netology.exceptions.AlreadyExistsException;
+import ru.netology.exceptions.NotFoundException;
 
 public class RepositoryTest {
     ProductRepository repo = new ProductRepository();
@@ -41,6 +43,53 @@ public class RepositoryTest {
 
         Assertions.assertArrayEquals(expected, repo.findAll());
     }
+    @Test
+    public void removeNonExistItem(){
+        Smartphone phone1 = new Smartphone(1, "Smart1", 30000, "Factory1");
+        Smartphone phone2 = new Smartphone(2, "Phone2", 45000, "Factory2");
+
+        repo.save(phone1);
+        repo.save(phone2);
+
+        Assertions.assertThrows(NotFoundException.class,()-> {
+            repo.removeById(4);
+
+        });
+    }
+    @Test
+    public void addItem(){
+        Book book1 = new Book(1, "book1", 200, "Author1");
+        Book book2 = new Book(2, "book2", 250, "Author2");
+        Book book3 = new Book(3, "book3", 300, "Author1");
+        Book book4 = new Book(4, "book4", 350, "Author2");
+
+        repo.save(book1);
+        repo.save(book2);
+
+        Product[] expected = {book1, book2};
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void addAlreadyExistItem(){
+        Book book1 = new Book(1, "book1", 200, "Author1");
+        Book book2 = new Book(2, "book2", 250, "Author2");
+        Book book3 = new Book(3, "book3", 300, "Author1");
+        Book book4 = new Book(4, "book4", 350, "Author2");
+
+        repo.save(book1);
+        repo.save(book2);
+        Assertions.assertThrows(AlreadyExistsException.class,()-> {
+            repo.save(book1);
+
+        });
+
+
+    }
 }
+
+
 
 
