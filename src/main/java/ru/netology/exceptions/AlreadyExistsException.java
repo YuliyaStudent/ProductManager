@@ -1,6 +1,7 @@
 package ru.netology.exceptions;
-public class AlreadyExistsException extends RuntimeException{
-    public AlreadyExistsException (String msq){
+
+public class AlreadyExistsException extends RuntimeException {
+    public AlreadyExistsException(String msq) {
         super(msq);
     }
 }

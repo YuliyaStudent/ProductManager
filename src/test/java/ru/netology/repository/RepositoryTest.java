@@ -43,21 +43,23 @@ public class RepositoryTest {
 
         Assertions.assertArrayEquals(expected, repo.findAll());
     }
+
     @Test
-    public void removeNonExistItem(){
+    public void removeNonExistItem() {
         Smartphone phone1 = new Smartphone(1, "Smart1", 30000, "Factory1");
         Smartphone phone2 = new Smartphone(2, "Phone2", 45000, "Factory2");
 
         repo.save(phone1);
         repo.save(phone2);
 
-        Assertions.assertThrows(NotFoundException.class,()-> {
+        Assertions.assertThrows(NotFoundException.class, () -> {
             repo.removeById(4);
 
         });
     }
+
     @Test
-    public void addItem(){
+    public void addItem() {
         Book book1 = new Book(1, "book1", 200, "Author1");
         Book book2 = new Book(2, "book2", 250, "Author2");
         Book book3 = new Book(3, "book3", 300, "Author1");
@@ -73,7 +75,7 @@ public class RepositoryTest {
     }
 
     @Test
-    public void addAlreadyExistItem(){
+    public void addAlreadyExistItem() {
         Book book1 = new Book(1, "book1", 200, "Author1");
         Book book2 = new Book(2, "book2", 250, "Author2");
         Book book3 = new Book(3, "book3", 300, "Author1");
@@ -81,7 +83,7 @@ public class RepositoryTest {
 
         repo.save(book1);
         repo.save(book2);
-        Assertions.assertThrows(AlreadyExistsException.class,()-> {
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
             repo.save(book1);
 
         });
